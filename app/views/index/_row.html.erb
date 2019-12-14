@@ -1,0 +1,39 @@
+<tr id='row<%=permits.id %>'>
+              <td><%= permit.serial_number %></td>
+              <td><%= permit.control_number %></td>
+              <td><%= permit.business_name %></td>
+              <td><%= permit.bid_number %></td>
+              <td><%= permit.lid %></td>
+              <td><%= permit.licence_type %></td>
+              <td><%= number_to_currency(permit.amount, :unit => 'KES ') %></td>
+              <td><%= permit.date_paid.strftime("%d %B  %Y") %></td>
+              <td><%= permit.valid_from.strftime("%d %B  %Y") %></td>
+              <td><%= permit.exceptions %></td>
+                <% if permit.is_renewal == true %>
+                  <td><label class="label label-primary">Renewal Permit</label></td>
+                <% else %>
+                <td>
+			  <div class="actions row-actions">
+<!--				  printing-->
+				  <span><a class="actions__item zmdi zmdi-print" href="print-license.html" title="print this permit" target="new"></a></span> 
+<!--				  download-->
+				  <span><i class="actions__item zmdi zmdi-download blue" title="download permit copy"></i></span> 
+				  <!--				  view-->
+				  <span><a class="actions__item zmdi zmdi-eye text-gray" title="View license" href="license-inline.html" target="new"></a></span> 
+<!--				  delete-->
+				   <span class="delete-record"><i class="actions__item zmdi zmdi-delete text-danger" title="delete this record"></i></span> 
+			  </div>
+        </div>
+      
+        </td>
+                  <td><label class="label label-success">New Permit</label></td>
+                <% end %>
+              <% if permit.printed == false %>
+                <td>
+                  <%= link_to 'Print New', print_permit_new_path(permit.id), class: 'btn btn-primary', target: '_blank' %>
+                  <%= link_to 'Delete', delete_permit_path(permit.id), method: 'DELETE', class: 'btn btn-danger' %>
+                </td>
+              <% else %>
+                <td><label for="">Printed</label></td>
+              <% end %>    
+</tr> 

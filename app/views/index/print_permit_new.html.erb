@@ -626,6 +626,7 @@ ol {
       <%= image_tag 'NBK logo', class: 'nbk d-none' %>
 	  </section>
   </page>
-
+<%= content_tag :div, class: "permit_information", data: {permit: @permit} do %>
+        <% end %>
 </body>
 </html>

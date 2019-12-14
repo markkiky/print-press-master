@@ -1,0 +1,571 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>LID Licenses</title>
+<!-- Vendor styles -->
+	<link rel="stylesheet" href="css/dropify2.css">
+<link rel="stylesheet" href="vendors/dropzone/dropzone.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="vendors/animate.css/animate.min.css">
+<link rel="stylesheet" href="vendors/jquery-scrollbar/jquery.scrollbar.css">
+<link rel="stylesheet" href="vendors/fullcalendar/fullcalendar.min.css">
+<link rel="stylesheet" href="vendors/flatpickr/flatpickr.min.css">
+<!-- Vendor styles -->
+
+<link rel="stylesheet" href="css/app.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<div class="main">
+  <header class="header">
+    <div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
+      <div class="navigation-trigger__inner"> <i class="navigation-trigger__line"></i> <i class="navigation-trigger__line"></i> <i class="navigation-trigger__line"></i> </div>
+    </div>
+    <div class="header__logo hidden-sm-down">
+      <h1><a href="http://localhost/finance/public/finance" class="text-capitalize">NCCG<br>Alcohol Drinks control & Licensing Board</a></h1>
+    </div>
+    
+    <!--    <form class="search" action="#">
+            <div class="search__inner">
+                <input type="text" class="search__text" placeholder="Search using cost centers....">
+                <i class="zmdi zmdi-search search__helper" data-ma-action="search-close"></i>
+            </div>
+        </form> -->
+    
+    <ul class="top-nav">
+      <li class="hidden-xs-down d-none"> <a href="#" data-ma-action="aside-open" data-ma-target=".chat" class="top-nav__notify"> <i class="zmdi zmdi-comment-alt-text"></i> </a> </li>
+    </ul>
+  </header>
+</div>
+<section id="content"> 
+  <!--		form container-->
+  <aside class="chat" id="new-application">
+    <div class="chat__header px-4">
+      <h2 class="chat__title mb-3">New License <small>Correctly fill all fields for the new application</small></h2>
+    </div>
+    <div class="scrollbar-inner">
+      <div class="px-4 pt-1 height-100150">
+        <%= form_tag create_permit_path , class: "contact100-form validate-form p-0 border-top", multipart: true do %>
+            <!---Enter Business name-->
+            <label class="label-input100 mb-2" for="business_name">Business Name *</label>
+            <div class="wrap-input100 validate-input" data-validate="Type Business Name">
+             <%= text_field_tag :business_name, nil, :required => true, placeholder: "Enter name of the business", class: "input100" %>
+
+             <span class="focus-input100"></span> </div>
+
+             <!-- Enter Business Number-->
+             <label class="label-input100 mb-2" for="bid_number">Business Number *</label>
+             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
+             <%= text_field_tag :bid_number, nil, :required =>true, placeholder: "Business number", class:"input100" %>
+
+             <span class="focus-input100"></span> </div>
+
+            <!---Physical Address-->
+            <label class="label-input100 mb-2" for="physical_address">Business Location Details *</label>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
+            
+            <%= text_field_tag :physical_address, nil, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
+            <span class="focus-input100"></span> </div>
+
+            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
+            <%= text_field_tag :plot_number, nil, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
+            <span class="focus-input100"></span> </div>
+          <!--				physical address-->
+          <hr class="w-100 +">
+
+             <!--- Type-->
+             <label class="label-input100 mb-2" for="schedule_id">License type *</label>
+             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
+             <%= select_tag :schedule_id, options_from_collection_for_select(@schedule, "id", "name"), class:"input100", placeholder:"Select license type" %>
+             <span class="focus-input100"></span> </div>
+             
+             <!--- Date Paid-->
+             <label class="label-input100 mb-2" for="date_paid">Date paid *</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :date_paid, nil, :required => true,placeholder:"select date", class: "input100 date-picker" %>
+             <span class="focus-input100"></span> </div>
+             <!---Date From-->
+             <label class="label-input100 mb-2" for="valid_from">Valid from *</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :valid_from, nil, :required => true, placeholder:"select date", class:"input100 date-picker" %>
+             <span class="focus-input100"></span> </div>
+             <hr class="w-100 +">
+
+             <!--- Date From-->
+             <label class="label-input100 mb-2" for="amount">amount</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :amount, nil, :required => true,  class:"input100 text-right", type:"number", placeholder:"Enter amount paid" %>
+             <span class="focus-input100"></span> </div>
+             <div class="container-contact100-form-btn w-100 ">
+             <%= submit_tag 'Save', class:"contact100-form-btn w-100" %>
+        <% end %>
+
+      </div>
+    </div>
+    <a href="messages.html" class="btn btn--action btn-danger d-none"><i class="zmdi zmdi-plus"></i></a> </aside>
+	
+	
+<!--	license renewals-->
+	<aside class="renew" id="renew-application">
+    <div class="chat__header px-4">
+      <h2 class="chat__title mb-3">License Renewal<small>Correctly fill all fields for the license renewal being applied for</small></h2>
+    </div>
+    <div class="scrollbar-inner">
+      <div class="px-4 pt-1 height-100150">
+        <%= form_tag renew_permit_path, class: "contact100-form validate-form p-0 border-top" do %>
+            <!---Enter Business name-->
+            <label class="label-input100 mb-2" for="business_name">Business Name *</label>
+            <div class="wrap-input100 validate-input" data-validate="Type Business Name">
+             <%= text_field_tag :business_name, nil, :required => true, placeholder: "Enter name of the business", class: "input100" %>
+
+             <span class="focus-input100"></span> </div>
+
+             <!-- Enter Business Number-->
+             <label class="label-input100 mb-2" for="bid_number">Business Number *</label>
+             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
+             <%= text_field_tag :bid_number, nil, :required =>true, placeholder: "Business number", class:"input100" %>
+
+             <span class="focus-input100"></span> </div>
+
+            <!---Physical Address-->
+            <label class="label-input100 mb-2" for="physical_address">Business Location Details *</label>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
+            
+            <%= text_field_tag :physical_address, nil, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
+            <span class="focus-input100"></span> </div>
+
+            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name"><aside class="chat" id="new-application">
+    <div class="chat__header px-4">
+      <h2 class="chat__title mb-3">New License <small>Correctly fill all fields for the new application</small></h2>
+    </div>
+    <div class="scrollbar-inner">
+      <div class="px-4 pt-1 height-100150">
+        <%= form_tag create_permit_path , class: "contact100-form validate-form p-0 border-top", multipart: true do %>
+            <!---Enter Business name-->
+            <label class="label-input100 mb-2" for="business_name">Business Name *</label>
+            <div class="wrap-input100 validate-input" data-validate="Type Business Name">
+             <%= text_field_tag :business_name, nil, :required => true, placeholder: "Enter name of the business", class: "input100" %>
+
+             <span class="focus-input100"></span> </div>
+
+             <!-- Enter Business Number-->
+             <label class="label-input100 mb-2" for="bid_number">Business Number *</label>
+             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
+             <%= text_field_tag :bid_number, nil, :required =>true, placeholder: "Business number", class:"input100" %>
+
+             <span class="focus-input100"></span> </div>
+
+            <!---Physical Address-->
+            <label class="label-input100 mb-2" for="physical_address">Business Location Details *</label>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
+            
+            <%= text_field_tag :physical_address, nil, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
+            <span class="focus-input100"></span> </div>
+
+            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
+            <%= text_field_tag :plot_number, nil, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
+            <span class="focus-input100"></span> </div>
+          <!--				physical address-->
+          <hr class="w-100 +">
+
+             <!--- Type-->
+             <label class="label-input100 mb-2" for="schedule_id">License type *</label>
+             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
+             <%= select_tag :schedule_id, options_from_collection_for_select(@schedule, "id", "name"), class:"input100", placeholder:"Select license type" %>
+             <span class="focus-input100"></span> </div>
+             
+             <!--- Date Paid-->
+             <label class="label-input100 mb-2" for="date_paid">Date paid *</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :date_paid, nil, :required => true,placeholder:"select date", class: "input100 date-picker" %>
+             <span class="focus-input100"></span> </div>
+             <!---Date From-->
+             <label class="label-input100 mb-2" for="valid_from">Valid from *</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :valid_from, nil, :required => true, placeholder:"select date", class:"input100 date-picker" %>
+             <span class="focus-input100"></span> </div>
+             <hr class="w-100 +">
+
+             <!--- Date From-->
+             <label class="label-input100 mb-2" for="amount">amount</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :amount, nil, :required => true,  class:"input100 text-right", type:"number", placeholder:"Enter amount paid" %>
+             <span class="focus-input100"></span> </div>
+             <div class="container-contact100-form-btn w-100 ">
+             <%= submit_tag 'Save', class:"contact100-form-btn w-100" %>
+        <% end %>
+
+      </div>
+    </div>
+    <a href="messages.html" class="btn btn--action btn-danger d-none"><i class="zmdi zmdi-plus"></i></a> </aside>
+	
+	
+            <%= text_field_tag :plot_number, nil, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
+            <span class="focus-input100"></span> </div>
+          <!--				physical address-->
+          <hr class="w-100 +">
+
+             <!--- Type-->
+             <label class="label-input100 mb-2" for="schedule_id">License type *</label>
+             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
+             <%= select_tag :schedule_id, options_from_collection_for_select(@schedule, "id", "name"), class:"input100", placeholder:"Select license type" %>
+             <span class="focus-input100"></span> </div>
+             
+             <!--- Date Paid-->
+             <label class="label-input100 mb-2" for="date_paid">Date paid *</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :date_paid, nil, :required => true,placeholder:"select date", class: "input100 date-picker" %>
+             <span class="focus-input100"></span> </div>
+             <!---Date From-->
+             <label class="label-input100 mb-2" for="valid_from">Valid from *</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :valid_from, nil, :required => true, placeholder:"select date", class:"input100 date-picker" %>
+             <span class="focus-input100"></span> </div>
+             <hr class="w-100 +">
+
+             <!--- Date From-->
+             <label class="label-input100 mb-2" for="amount">amount</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :amount, nil, :required => true,  class:"input100 text-right", type:"number", placeholder:"Enter amount paid" %>
+             <span class="focus-input100"></span> </div>
+             <div class="container-contact100-form-btn w-100 ">
+             <%= submit_tag 'Save', class:"contact100-form-btn w-100" %>
+        <% end %>
+      </div>
+      
+    </div>
+    <a href="messages.html" class="btn btn--action btn-danger d-none"><i class="zmdi zmdi-plus"></i></a> </aside>
+
+    <!---Edit License-->
+    <aside class="chat" id="edit-application">
+    <div class="chat__header px-4">
+      <h2 class="chat__title mb-3">New License <small>Correctly fill all fields for the new application</small></h2>
+    </div>
+    <div class="scrollbar-inner">
+      <div class="px-4 pt-1 height-100150">
+        <%= form_tag create_permit_path , class: "contact100-form validate-form p-0 border-top", multipart: true do %>
+            <!---Enter Business name-->
+            <label class="label-input100 mb-2" for="business_name">Business Name *</label>
+            <div class="wrap-input100 validate-input" data-validate="Type Business Name">
+             <%= text_field_tag :business_name, nil, :required => true, placeholder: "Enter name of the business", class: "input100" %>
+
+             <span class="focus-input100"></span> </div>
+
+             <!-- Enter Business Number-->
+             <label class="label-input100 mb-2" for="bid_number">Business Number *</label>
+             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
+             <%= text_field_tag :bid_number, nil, :required =>true, placeholder: "Business number", class:"input100" %>
+
+             <span class="focus-input100"></span> </div>
+
+            <!---Physical Address-->
+            <label class="label-input100 mb-2" for="physical_address">Business Location Details *</label>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
+            
+            <%= text_field_tag :physical_address, nil, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
+            <span class="focus-input100"></span> </div>
+
+            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
+            <%= text_field_tag :plot_number, nil, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
+            <span class="focus-input100"></span> </div>
+          <!--				physical address-->
+          <hr class="w-100 +">
+
+             <!--- Type-->
+             <label class="label-input100 mb-2" for="schedule_id">License type *</label>
+             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
+             <%= select_tag :schedule_id, options_from_collection_for_select(@schedule, "id", "name"), class:"input100", placeholder:"Select license type" %>
+             <span class="focus-input100"></span> </div>
+             
+             <!--- Date Paid-->
+             <label class="label-input100 mb-2" for="date_paid">Date paid *</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :date_paid, nil, :required => true,placeholder:"select date", class: "input100 date-picker" %>
+             <span class="focus-input100"></span> </div>
+             <!---Date From-->
+             <label class="label-input100 mb-2" for="valid_from">Valid from *</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :valid_from, nil, :required => true, placeholder:"select date", class:"input100 date-picker" %>
+             <span class="focus-input100"></span> </div>
+             <hr class="w-100 +">
+
+             <!--- Date From-->
+             <label class="label-input100 mb-2" for="amount">amount</label>
+             <div class="wrap-input100  validate-input" data-validate="Select a date">
+             <%= text_field_tag :amount, nil, :required => true,  class:"input100 text-right", type:"number", placeholder:"Enter amount paid" %>
+             <span class="focus-input100"></span> </div>
+             <div class="container-contact100-form-btn w-100 ">
+             <%= submit_tag 'Save', class:"contact100-form-btn w-100" %>
+        <% end %>
+
+      </div>
+    </div>
+    <a href="messages.html" class="btn btn--action btn-danger d-none"><i class="zmdi zmdi-plus"></i></a> </aside>
+	
+	
+<!--	license renewals-->
+  <!--		form container--> 
+  
+  <!--	datatable-->
+  <section class="content p-4">
+    <header class="content__title">
+      <h1>DATA TABLES</h1>
+      <div class="actions"> <a href="#" class="actions__item zmdi zmdi-trending-up"></a> <a href="#" class="actions__item zmdi zmdi-check-all"></a>
+        <div class="dropdown actions__item"> <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+          <div class="dropdown-menu dropdown-menu-right"> <a href="#" class="dropdown-item">Refresh</a> <a href="#" class="dropdown-item">Manage Widgets</a> <a href="#" class="dropdown-item">Settings</a> </div>
+        </div>
+      </div>
+    </header>
+    <div class="card">
+    <div class="card-body p-0">
+    <h4 class="card-title mt-4 mx-4">Licenses Due</h4>
+    <h6 class="card-subtitle mx-4">The table below contains a record of all Alcohol licenses available in Nairobi County</h6>
+    <div class="row mx-4">
+      <div class="col-12 p-0">
+        <button class="btn btn-primary btn-blue btn--icon-text ml-0 pl-0"  data-ma-action="aside-open" data-ma-target=".chat" class="top-nav__notify">
+        <em class="zmdi zmdi-plus zmdi-hc-fw"></em> New License
+        </button>
+        <button class="btn btn-secondary btn-success btn--icon-text mx-3" data-ma-action="aside-open" data-ma-target=".renew"><i class="zmdi zmdi-refresh"></i> Renew License</button>
+        <div class="p-0 m-0 float-right">
+          
+			<button class="btn btn-secondary btn-success btn--icon-text mx-3 upload-file"><i class="zmdi zmdi-file-add"></i> Upload File</button>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+    <table id="data-table" class="table dataTable table-striped text-nowrap" role="grid">
+      <thead class="thead-default text-capitalize">
+        <tr>
+          <th>S/No</th>
+          <th>Control No</th>
+          <th>Business Name</th>
+          <th>Bid No</th>
+          <th>Lid</th>
+          <th>Type of License</th>
+          <th>Amount</th>
+          <th>Date Paid</th>
+          <th>Valid From</th>
+          
+          <th>Renewal</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tfoot class="text-capitalize">
+        <tr>
+          <th>S/No</th>
+          <th>Control No</th>
+          <th>Business Name</th>
+          <th>Bid No</th>
+          <th>Lid</th>
+          <th>Type of License</th>
+          <th>Amount</th>
+          <th>Date Paid</th>
+          <th>Valid From</th>
+          
+          <th>Renewal</th>
+          <th>Actions</th>
+        </tr>
+      </tfoot>
+      <tbody>
+       <% @permits.each do |permit| %>
+            <tr>
+              <td><%= permit.serial_number %></td>
+              <td><%= permit.control_number %></td>
+              <td><%= permit.business_name %></td>
+              <td><%= permit.bid_number %></td>
+              <td><%= permit.lid %></td>
+              <td><%= permit.licence_type %></td>
+              <td><%= number_to_currency(permit.amount, :unit => 'KES ') %></td>
+              <td><%= permit.date_paid %></td>
+              <td><%= permit.valid_from %></td>
+              
+                <% if permit.is_renewal == true %>
+                  <td><label class="label label-primary">Renewal Permit</label></td>
+                <% else %>
+                  <td><label class="label label-success">New Permit</label></td>
+                <% end %>
+                <td>
+                <div class="actions row-actions">
+                    <!--- Printing -->
+                    <%= link_to print_permit_new_path(permit.id), title: "print this permit", target:'_blank' do %>
+                        <span><i class="actions__item zmdi zmdi-print" title="print this permit" target="_blank" ></i></span>
+                    <% end %>
+                    
+                    
+                    <!--- Download -->
+                    <span><a class="actions__item zmdi zmdi-download blue" title="download permit copy" onclick="printPermitNew()" ></a></span> 
+
+                    <!--- View -->
+                    <span><a class="actions__item zmdi zmdi-eye text-gray" title="View license" href="license-inline.html" target="new"></a></span> 
+
+                    <!--- Delete -->
+                    <!---<a class="actions__item zmdi zmdi-delete text-danger" title="delete this record" >
+                    </a> -->
+
+                    <%= link_to delete_permit_path(permit.id), method: "DELETE" do %>
+                      <span class="delete-record"><i class="actions__item zmdi zmdi-delete text-danger" title="delete this record"></i></span>
+                      <% $pressed_id = permit.id %>
+                      <% puts("The pressed id is #{$pressed_id}") %>
+
+                    <% end %>
+                    
+                    </span> 
+                </div>
+                </div>
+             </td>
+          </tr>
+       <% end %>
+         
+         
+        </tbody>
+      
+    </table>
+
+    </div>
+    </div>
+    </div>
+    
+  </section>
+  
+  <!--	datatable--> 
+  
+  <!--upload files-->
+  <div class="col-12 p-5 d-none">
+    <center>
+		<div class="card">
+                        <form>
+					
+						</form>
+                    </div>
+      <div>
+        <div class="col-8 m-5">
+          <div class="card">
+            <div class="card-header ">
+              <div class="card-header pl-0">
+                <h2 class="card-title text-left">Recent Posts</h2>
+                <small class="card-subtitle text-left float-left">Venenatis portauam Inceptos ameteiam</small> </div>
+              <div class="card-block">
+                <form class="dropzone drop-section-container p-5 mt-2 cursor-pointer" action="/file-upload" id="dropzone-upload"> 
+					<img class="img-fluid mb-4 drop-img" src="img/upload-bg.png">
+                  <h3>Drag & Drop</h3>
+                  <small class="card-subtitle">your files here, or browse</small> 
+					
+					<input type="file" name="file" class="dropzone"/>
+				  </form>
+				  
+                <div class="upload-status-container mt-4">
+                  <div class="row">
+                    <div class="col-1"> <img src="img/excel (2).svg" class="icon"> </div>
+                    <div class="col-11 d-flex flex-column pl-4"> <small class="text-left">file name</small> <small class="text-left">status</small> </div>
+                  </div>
+                </div>
+                <div class="container-contact100-form-btn w-100 ">
+                  <button class="contact100-form-btn w-100"> Upload file </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </center>
+  </div>
+  <!--upload files--> 
+
+<!--drag and drop files-->
+<div class="col-12 p-5 drop-file-container vw-100 vh-100 animated d-none">
+	<div class="position-relative">
+		<span  class="actions__item zmdi zmdi-close text-white float-right position-absolute close-droper" title="close form"></span>
+		<div class="card animated delete-row">
+			
+			<div class="card-body">
+				<div class="row">
+					
+				<div class="col-12">					
+					<form class="drop-section-container cursor-pointer">
+						<input type="file"  name="file" id="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  class="dropify" data-show-loader="true" />
+					</form>
+				</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!--delete item confirmation-->
+
+<div class="col-12 p-5 notification-container vw-100 vh-100 animated d-none">
+	<div >
+		<div class="card animated delete-row">
+			<div class="card-header bg-danger py-2 d-flex justify-content-between align-items-center align-content-center">
+				<h2 class="card-title text-capitalize text-white m-0">Delete Record?</h2>
+				<div class="actions text-white float-right close-delete">
+					<a href="#" class="actions__item zmdi zmdi-close text-white m-0 p-0" title="close noification"></a> 
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					
+				<div class="col-12">
+					<img src="img/warning.svg" class=" icon float-left  mr-3">
+					<h2 class="card-title mb-3 kev-capitalize font-weight-bold" id="record-name">Firm name</h2>
+					<p>Are you sure you want to delete this record<br>You cant undo this action</p>
+				</div>
+				</div>
+			</div>
+			<div class="card-footer d-flex justify-content-end">
+        <a class="card-link close-delete" href="#">discard</a>
+        <a class="card-link text-danger glow" href="/index/delete">delete</a>
+      </div>
+		</div>
+	</div>
+</div>
+
+<!--delete item confirmation-->
+
+<!--
+
+footer
+-->
+
+<footer class="footer hidden-xs-down">
+      <p class="text-capitalize">nairobi city county</p>
+      <p class="text-capitalize">Alcohol Drinks control and licensing bord</p>
+      <ul class="nav footer__nav">
+        <a class="nav-link" href="#">Homepage</a> <a class="nav-link" href="#">Company</a> <a class="nav-link" href="#">Support</a> <a class="nav-link" href="#">News</a> <a class="nav-link" href="#">Contacts</a>
+      </ul>
+    </footer>
+  
+</section>
+
+<!--	scripts--> 
+<!-- Javascript --> 
+<!-- Vendors --> 
+<script src="vendors/jquery/jquery.min.js"></script> 
+<script src="vendors/popper.js/popper.min.js"></script> 
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script> 
+<script src="vendors/jquery-scrollbar/jquery.scrollbar.min.js"></script> 
+<script src="vendors/jquery-scrollLock/jquery-scrollLock.min.js"></script> 
+
+<!-- Vendors: Data tables --> 
+<script src="vendors/flatpickr/flatpickr.min.js"></script> 
+<script src="vendors/dropzone/dropzone.min.js"></script> 
+<script src="vendors/datatables/jquery.dataTables.min.js"></script> 
+<script src="vendors/datatables-buttons/dataTables.buttons.min.js"></script> 
+<script src="vendors/datatables-buttons/buttons.print.min.js"></script> 
+<script src="vendors/jszip/jszip.min.js"></script> 
+<script src="vendors/datatables-buttons/buttons.html5.min.js"></script> 
+
+<!-- App functions and actions --> 
+<script src="js/app.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/dropify2.js"></script>
+	<script>
+		$('.dropify').dropify();
+	</script>
+    <%= content_tag :div, class: "permit_information", data: {permit: @permits} do %>
+        <% end %>
+</body>
+</html>

@@ -8,7 +8,7 @@ class IndexController < ApplicationController
   @@control_number = 3364
 
 
-  def liqour_permits
+  def index
     @permits = Liqour.all
     @schedule = Schedule.all
   end
@@ -27,15 +27,19 @@ class IndexController < ApplicationController
     if Liqour.where(is_renewal: false).any? == false
       @permit = Liqour.new(permit_params)
       @permit.lid = @@start_lid
+
+      logger.debug { "The First If" }
     else
       @permit = Liqour.new(permit_params)
       @last_permit = Liqour.where(is_renewal: false).last
       @permit.lid = @last_permit.lid.to_i + 1
+      logger.debug { "At Else" }
     end
     @permit.control_number = Liqour.last.control_number.to_i + 1
     @permit.serial_number = Liqour.last.serial_number.to_i + 1
     @permit.valid_from = @permit.date_paid
     if @permit.save!
+      logger.debug { "here now" }
       redirect_to root_url
     end
   end
@@ -84,6 +88,6 @@ class IndexController < ApplicationController
   private
 
   def permit_params
-    params.permit(:business_name, :bid_number, :licence_type, :amount, :date_paid, :licence_type, :exceptions, :physical_address, :plot_number, :schedule_id, :lid, :valid_from)
+    params.permit(:business_name, :bid_number, :licence_type, :amount, :date_paid, :licence_type, :physical_address, :plot_number, :schedule_id, :lid, :valid_from)
   end
 end
