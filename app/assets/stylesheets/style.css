@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+}
+.libre-bold{
+	font-family: 'Libre Baskerville', serif;
+	font-weight: bold;
+}
+.libre-reg{
+	font-family: 'Libre Baskerville', serif;
+	font-weight:300;
+}
+
+.a4-size{
+	width: 595px;
+    height: 800px;
+
+    background: url("img/Group 31.jpg");
+    /* background-attachment: fixed; */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media print {
+    .a4-size{
+        width: 21cm;
+        height: 29.7cm;
+        margin: 30mm 45mm 30mm 45mm;
+        /* change the margins as you want them to be. */
+   }
+}
+
+.qr-container{
+	width: 105px;
+	height: 105px;
+	border: 1px solid black;
+}
+p{
+	margin-bottom:7.5px;
+}
+h4{
+	font-size: 15px;
+	font-weight: bold;
+}
+
+header h3{
+	font-size: 27px;
+	font-weight: bold;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+header h5{
+	font-size: 20px;
+	font-weight: bold;
+	font-family: 'Libre Baskerville', serif;
+	text-transform: capitalize;
+	white-space: nowrap;
+}
+
+.duration{
+	    padding: 7.5px;
+    border: 1px solid black;
+}
+.table td{
+	padding: 7.5px;
+}
+
+.green{
+	display: block;
+	height: 8px;
+	color: green;
+	width: 100%;
+	background: #00421B;
+	border-bottom: 2px solid #FFDE00;
+	margin-bottom: 5px;
+}
+
+.note{
+	font-size: 8px;
+}
+
+.nbk{
+	height: 50px;
+    float: right;
+    height: 30px;
+    position: absolute;
+    right: 15px;
+    bottom: 0px;
+}
+.locence-no{
+	background: rgba(255, 222, 0, .35);
+}
+
+#permit {
+	border-style: dotted;
+	height: 100%;
+}

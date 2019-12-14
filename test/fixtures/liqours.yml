@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serial_number: MyString
+  control_number: MyString
+  business_name: MyString
+  bid_number: MyString
+  lid: MyString
+  licence_type: MyString
+  amount: 9.99
+  date_paid: 2019-08-27
+  printed: false
+  bank_transaction_code: MyString
+
+two:
+  serial_number: MyString
+  control_number: MyString
+  business_name: MyString
+  bid_number: MyString
+  lid: MyString
+  licence_type: MyString
+  amount: 9.99
+  date_paid: 2019-08-27
+  printed: false
+  bank_transaction_code: MyString

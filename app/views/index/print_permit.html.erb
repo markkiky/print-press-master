@@ -1,0 +1,117 @@
+<%= link_to 'Back', root_url, class: 'btn btn-primary', style: 'float: left' %>
+<button class="btn btn-primary" style="float: right" onclick="printPermit()">Print</button>
+  <center>
+    <div id="permit" class="container-fluid a4-size m-2">
+    <header>
+      <div class="col-12 d-flex p-0 mb-2">
+        <div class="col-3 p-0">
+        <div class="figure-img">
+          <%= image_tag 'Group 24' %>
+         </div>
+
+      </div>
+
+        <div class="col-9 p-0">
+          <div class="col-12 row p-0 pt-1">
+            <h3 class="text-left">Nairobi City County</h3>
+            <h5 class="text-left">liquor license</h5>
+          </div>
+
+          <div class="green"></div>
+          <div class="yellow"></div>
+          <div class="row col-12 p-0">
+            <span class="duration">Issue Date: <span class="libre-bold pr-2"><%= @permit.date_paid.to_date %></span>   Control No.: <span class="libre-bold"><%= @permit.control_number %></span> </span>
+          </div>
+        </div>
+        </div>
+    </header>
+    <div class="row">
+      <div class="col-12">
+        <p class="text-left"><span class="libre-bold">Nairobi City County grants this liquor License to ...</span></P>
+      </div>
+      <div class="col-8 mb-1">
+        <table class="table table-bordered mb-0">
+          <tbody>
+            <!--				the name to the busibness-->
+            <tr>
+              <td><p>Applicant/Business/Commercial Name</p>
+                <p class="text-uppercase libre-bold m-0 p-0"><%= @permit.business_name %></p></td>
+            </tr>
+
+            <!--				the KRA pin-->
+            <tr>
+              <td>KRA Pin: <span class="libre-bold">A790274608</span></td>
+            </tr>
+
+            <!--				the businness ID-->
+            <tr>
+              <td class="text-capitalize">business id: <span class="libre-bold"><%= @permit.bid_number %></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <div class="col-4 mb-1">
+      <div class="locence-no max-height d-flex h-100 justify-content-center align-items-center align-content-center p-2 flex-column">
+        <p>license ID</p>
+        <p> <span class="libre-bold">LID <%= @permit.lid %></span</p>
+      </div>
+    </div>
+      <div class="col-12 text-left mt-2 mb-2">
+        <h4>In activity of</h4>
+      <div class="col-12 info-container libre-bold p-0 m-0">
+            <p><%= @permit.type_of_license %></p>
+            <p>Having Paid a Liquor License Fee of <%= number_to_currency(@permit.amount, :unit => 'KES ') %></p>
+            <p>Amount in words <span>***<%= @permit.amount.to_i.to_s.en.numwords %> only ***</span></p>
+      </div>
+      </div>
+      <div class="col-12">
+        <table class="table table-bordered table-striped">
+          <tbody>
+         <tr>
+            <td>Valid from : <span class="libre-bold"><%= @permit.date_paid.to_date %></span></td>
+            <td>Valid to: <span class="libre-bold"><%= @permit.date_paid.to_date + 12.months - 1.day %></span></td>
+          </tr>
+          <tr>
+            <td colspan="2"> License schedule : <span class="libre-bold">None</span></td>
+          </tr>
+          <tr>
+            <td colspan="2">Business under this permit shall be conducted at the address as indicated below</td>
+          </tr>
+          <tr>
+            <td>P.O. Box : <span class="libre-bold"><%= @permit.physical_address %></span></td>
+            <td>Plot No. : <%= @permit.plot_number %></td>
+          </tr>
+          <tr>
+            <td colspan="2">Road Street : <span class="lire-bold">MOMBASA ROAD</span></td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+      <div class="col-12 d-flex justify-content-between">
+          <div col-6>
+        <p class="text-left">Exceptions :<span class="libre-bold"><%= @permit.exceptions %></span> </p>
+      </div>
+
+      <DIV class="col-6">
+        <div class="qr-container float-right">
+          <script>
+            // var x = Math.floor((Math.random() * 99) + 1);
+            var x = "<%= @permit.business_name %> + <%= @permit.control_number %> + <%= @permit.date_paid.to_date + 12.months - 1.day %>"
+            // document.write("<img src='https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=" + x + "'>")
+          </script>
+        </div>
+      </DIV>
+
+      </div>
+      <div class="col-12">
+        <p class="text-left libre-bold">Notice</p>
+      <p class="text-left libre-reg note">Granting this permit does not exempt the business identified above from complying with the current regulation on health and safety as established by the Government of Kenya and Nairobi City county</p>
+
+      <p class="text-left libre-reg note">you  are authorized to sell alcohol upto an hours time beyond the authorized selling hours assigned to this license</p>
+
+        <!-- <img src="img/NBK logo.png" class="nbk"> -->
+        <%= image_tag 'NBK logo', class: 'nbk' %>
+      </div>
+    </div>
+  </div>
+  </center>
