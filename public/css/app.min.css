@@ -10210,7 +10210,7 @@ opacity:1
     left: 1rem;
     top: 1.1rem
 }
-.chat,.renew {
+.chat,.renew,.update {
     position: fixed;
     top: 0;
     right: 0;
@@ -10226,24 +10226,24 @@ opacity:1
 }
 
 @media screen and (prefers-reduced-motion:reduce) {
-.chat,.renew {
+.chat,.renew,.update {
     transition: none
 }
 }
-.chat:not(.toggled),.renew:not(.toggled) {
+.chat:not(.toggled),.renew:not(.toggled),.update:not(.toggled){
     -webkit-transform: translate3d(340px, 0, 0);
     transform: translate3d(340px, 0, 0);
     opacity: 0
 }
-.chat.toggled, .renew.toggled {
+.chat.toggled, .renew.toggled, .update.toggled {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     opacity: 1
 }
-.chat__header,.renew__header {
+.chat__header,.renew__header, .update__header {
     padding: 0 2rem
 }
-.chat__title,.renew__title {
+.chat__title,.renew__title, .update__title {
     line-height: 100%;
     margin: 0 0 2rem;
     font-size: 1.2rem

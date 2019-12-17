@@ -1,0 +1,44 @@
+<% @permits.each do |permit| %>
+            <tr>
+              <td><%= permit.serial_number %></td>
+              <td><%= permit.control_number %></td>
+              <td><%= permit.business_name %></td>
+              <td><%= permit.bid_number %></td>
+              <td><%= permit.lid %></td>
+              <td><%= permit.licence_type %></td>
+              <td><%= number_to_currency(permit.amount, :unit => 'KES ') %></td>
+              <td><%= permit.date_paid %></td>
+              <td><%= permit.valid_from %></td>
+              
+                <% if permit.is_renewal == true %>
+                  <td><label class="label label-primary">Renewal Permit</label></td>
+                <% else %>
+                  <td><label class="label label-success">New Permit</label></td>
+                <% end %>
+                <td>
+                <div class="actions row-actions">
+                    <!--- Printing -->
+                    <%= link_to print_permit_new_path(permit.id), title: "print this permit", target:'_blank' do %>
+                        <span><i class="actions__item zmdi zmdi-print" title="print this permit" target="_blank" ></i></span>
+                    <% end %>
+                    
+                    
+                    <!--- Download -->
+                    <span><a class="actions__item zmdi zmdi-download blue" title="download permit copy" onclick="printPermitNew()" ></a></span> 
+
+                    <!--- View -->
+                    <span><a class="actions__item zmdi zmdi-eye text-gray" title="View license" href="license-inline.html" target="new"></a></span> 
+                    <!--- Delete -->
+                    <!---<a class="actions__item zmdi zmdi-delete text-danger" title="delete this record" >
+                    </a> -->
+
+                    <%= link_to delete_permit_path(permit.id), method: "DELETE" do %>
+                      <span class="delete-record"><i class="actions__item zmdi zmdi-delete text-danger" title="delete this record"></i></span>
+                    <% end %>
+                    
+                    </span> 
+                </div>
+                </div>
+             </td>
+          </tr>
+       <% end %>

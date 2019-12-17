@@ -40,8 +40,10 @@
     </ul>
   </header>
 </div>
+
 <section id="content"> 
-  <!--		form container-->
+  <!---form container-->
+  <!---New License Container-->
   <aside class="chat" id="new-application">
     <div class="chat__header px-4">
       <h2 class="chat__title mb-3">New License <small>Correctly fill all fields for the new application</small></h2>
@@ -138,75 +140,11 @@
             <span class="focus-input100"></span> </div>
 
             <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name"><aside class="chat" id="new-application">
-    <div class="chat__header px-4">
-      <h2 class="chat__title mb-3">New License <small>Correctly fill all fields for the new application</small></h2>
-    </div>
-    <div class="scrollbar-inner">
-      <div class="px-4 pt-1 height-100150">
-        <%= form_tag create_permit_path , class: "contact100-form validate-form p-0 border-top", multipart: true do %>
-            <!---Enter Business name-->
-            <label class="label-input100 mb-2" for="business_name">Business Name *</label>
-            <div class="wrap-input100 validate-input" data-validate="Type Business Name">
-             <%= text_field_tag :business_name, nil, :required => true, placeholder: "Enter name of the business", class: "input100" %>
-
-             <span class="focus-input100"></span> </div>
-
-             <!-- Enter Business Number-->
-             <label class="label-input100 mb-2" for="bid_number">Business Number *</label>
-             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
-             <%= text_field_tag :bid_number, nil, :required =>true, placeholder: "Business number", class:"input100" %>
-
-             <span class="focus-input100"></span> </div>
-
-            <!---Physical Address-->
-            <label class="label-input100 mb-2" for="physical_address">Business Location Details *</label>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-            
-            <%= text_field_tag :physical_address, nil, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
-            <span class="focus-input100"></span> </div>
-
-            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
+   
             <%= text_field_tag :plot_number, nil, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
             <span class="focus-input100"></span> </div>
-          <!--				physical address-->
-          <hr class="w-100 +">
-
-             <!--- Type-->
-             <label class="label-input100 mb-2" for="schedule_id">License type *</label>
-             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
-             <%= select_tag :schedule_id, options_from_collection_for_select(@schedule, "id", "name"), class:"input100", placeholder:"Select license type" %>
-             <span class="focus-input100"></span> </div>
-             
-             <!--- Date Paid-->
-             <label class="label-input100 mb-2" for="date_paid">Date paid *</label>
-             <div class="wrap-input100  validate-input" data-validate="Select a date">
-             <%= text_field_tag :date_paid, nil, :required => true,placeholder:"select date", class: "input100 date-picker" %>
-             <span class="focus-input100"></span> </div>
-             <!---Date From-->
-             <label class="label-input100 mb-2" for="valid_from">Valid from *</label>
-             <div class="wrap-input100  validate-input" data-validate="Select a date">
-             <%= text_field_tag :valid_from, nil, :required => true, placeholder:"select date", class:"input100 date-picker" %>
-             <span class="focus-input100"></span> </div>
-             <hr class="w-100 +">
-
-             <!--- Date From-->
-             <label class="label-input100 mb-2" for="amount">amount</label>
-             <div class="wrap-input100  validate-input" data-validate="Select a date">
-             <%= text_field_tag :amount, nil, :required => true,  class:"input100 text-right", type:"number", placeholder:"Enter amount paid" %>
-             <span class="focus-input100"></span> </div>
-             <div class="container-contact100-form-btn w-100 ">
-             <%= submit_tag 'Save', class:"contact100-form-btn w-100" %>
-        <% end %>
-
-      </div>
-    </div>
-    <a href="messages.html" class="btn btn--action btn-danger d-none"><i class="zmdi zmdi-plus"></i></a> </aside>
-	
-	
-            <%= text_field_tag :plot_number, nil, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
-            <span class="focus-input100"></span> </div>
-          <!--				physical address-->
-          <hr class="w-100 +">
+            <!--				physical address-->
+            <hr class="w-100 +">
 
              <!--- Type-->
              <label class="label-input100 mb-2" for="schedule_id">License type *</label>
@@ -240,9 +178,9 @@
     <a href="messages.html" class="btn btn--action btn-danger d-none"><i class="zmdi zmdi-plus"></i></a> </aside>
 
     <!---Edit License-->
-    <aside class="chat" id="edit-application">
+    <aside class="update" id="update-application">
     <div class="chat__header px-4">
-      <h2 class="chat__title mb-3">New License <small>Correctly fill all fields for the new application</small></h2>
+      <h2 class="chat__title mb-3">Update License <small>Edit all the field to update application</small></h2>
     </div>
     <div class="scrollbar-inner">
       <div class="px-4 pt-1 height-100150">
@@ -370,57 +308,10 @@
         </tr>
       </tfoot>
       <tbody>
-       <% @permits.each do |permit| %>
-            <tr>
-              <td><%= permit.serial_number %></td>
-              <td><%= permit.control_number %></td>
-              <td><%= permit.business_name %></td>
-              <td><%= permit.bid_number %></td>
-              <td><%= permit.lid %></td>
-              <td><%= permit.licence_type %></td>
-              <td><%= number_to_currency(permit.amount, :unit => 'KES ') %></td>
-              <td><%= permit.date_paid %></td>
-              <td><%= permit.valid_from %></td>
-              
-                <% if permit.is_renewal == true %>
-                  <td><label class="label label-primary">Renewal Permit</label></td>
-                <% else %>
-                  <td><label class="label label-success">New Permit</label></td>
-                <% end %>
-                <td>
-                <div class="actions row-actions">
-                    <!--- Printing -->
-                    <%= link_to print_permit_new_path(permit.id), title: "print this permit", target:'_blank' do %>
-                        <span><i class="actions__item zmdi zmdi-print" title="print this permit" target="_blank" ></i></span>
-                    <% end %>
-                    
-                    
-                    <!--- Download -->
-                    <span><a class="actions__item zmdi zmdi-download blue" title="download permit copy" onclick="printPermitNew()" ></a></span> 
-
-                    <!--- View -->
-                    <span><a class="actions__item zmdi zmdi-eye text-gray" title="View license" href="license-inline.html" target="new"></a></span> 
-
-                    <!--- Delete -->
-                    <!---<a class="actions__item zmdi zmdi-delete text-danger" title="delete this record" >
-                    </a> -->
-
-                    <%= link_to delete_permit_path(permit.id), method: "DELETE" do %>
-                      <span class="delete-record"><i class="actions__item zmdi zmdi-delete text-danger" title="delete this record"></i></span>
-                      <% $pressed_id = permit.id %>
-                      <% puts("The pressed id is #{$pressed_id}") %>
-
-                    <% end %>
-                    
-                    </span> 
-                </div>
-                </div>
-             </td>
-          </tr>
-       <% end %>
+       
+         <%= render partial: 'permits'%>
          
-         
-        </tbody>
+      </tbody>
       
     </table>
 
