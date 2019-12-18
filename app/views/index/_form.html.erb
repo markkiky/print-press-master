@@ -1,5 +1,5 @@
-<%= form_for @permit, :remote => true do |f| %>
-     <%= render 'layouts/error_messages', f: f.object %>
+<%= form_for @permit, :url => "edit_path", :remote => true do |f| %>
+    
           
      <!-- form_for @object, html: { multipart: true }, do |f| -->
      <!-- form_for @object, html: { class: "classname" }, do |f| -->
@@ -7,24 +7,24 @@
      <!---Business number field-->
      <label class="label-input100 mb-2" for="business_name">Business Name *</label>
      <div class="wrap-input100 validate-input" data-validate="Type Business Name">
-     <%= f.text_field :business_name, nil, :required => true, placeholder: "Enter name of the business", class: "input100", name: "business_name" %>
+     <%= f.text_field :business_name, :required => true, placeholder: "Enter name of the business", class: "input100" %>
      <span class="focus-input100"></span> </div>
 
      <!---Business number field-->
      <label class="label-input100 mb-2" for="bid_number">Business Number *</label>
      <div class="wrap-input100  validate-input" data-validate="Type Business Name">
-     <%= f.text_field :bid_number, nil, :required =>true, placeholder: "Business number", class:"input100", name: "bid_number" %>
+     <%= f.text_field :bid_number, :required =>true, placeholder: "Business number", class:"input100", name: "bid_number" %>
      <span class="focus-input100"></span> </div>
 
      <!---Physical address field-->
      <label class="label-input100 mb-2" for="physical_address">Business Location Details *</label>
      <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-     <%= f.text_field :physical_address, nil, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
+     <%= f.text_field :physical_address, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
      <span class="focus-input100"></span> </div>
 
      <!---Plot number field-->
      <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
-     <%= f.text_field :plot_number, nil, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
+     <%= f.text_field :plot_number, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
      <span class="focus-input100"></span> </div>
      <hr class="w-100 +">
 
@@ -37,13 +37,21 @@
      <!---Date Paid-->
      <label class="label-input100 mb-2" for="date_paid">Date paid *</label>
      <div class="wrap-input100  validate-input" data-validate="Select a date">
-     <%= f.text_field :date_paid, nil, :required => true,placeholder:"select date", class: "input100 date-picker" %>
+     <%= f.text_field :date_paid, :required => true,placeholder:"select date", class: "input100 date-picker" %>
      <span class="focus-input100"></span> </div>
 
-     <!---Date from-->
+     
+     <!---Date From-->
+     <label class="label-input100 mb-2" for="valid_from">Valid from *</label>
+     <div class="wrap-input100  validate-input" data-validate="Select a date">
+     <%= f.text_field :valid_from, :required => true, placeholder:"select date", class:"input100 date-picker" %>
+     <span class="focus-input100"></span> </div>
+     <hr class="w-100 +">
+
+     <!---Amount-->
      <label class="label-input100 mb-2" for="amount">amount</label>
      <div class="wrap-input100  validate-input" data-validate="Select a date">
-     <%= f.text_field :amount, nil, :required => true,  class:"input100 text-right", type:"number", placeholder:"Enter amount paid" %>
+     <%= f.text_field :amount, :required => true,  class:"input100 text-right", type:"number", placeholder:"Enter amount paid" %>
      <span class="focus-input100"></span> </div>
      <div class="container-contact100-form-btn w-100 ">
      <%= f.submit 'Save', class:"contact100-form-btn w-100" %>

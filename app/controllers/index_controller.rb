@@ -72,8 +72,9 @@ class IndexController < ApplicationController
     redirect_to root_url
   end
 
-  def edit
-    
+  def edit_permit
+    @permit = Liqour.find(params[:id])
+    @schedule = Schedule.all
   end
 
   def print_permit

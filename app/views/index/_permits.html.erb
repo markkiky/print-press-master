@@ -27,7 +27,10 @@
                     <span><a class="actions__item zmdi zmdi-download blue" title="download permit copy" onclick="printPermitNew()" ></a></span> 
 
                     <!--- View -->
-                    <span><a class="actions__item zmdi zmdi-eye text-gray" title="View license" href="license-inline.html" target="new"></a></span> 
+                    <%= link_to edit_permit_path(permit.id), method:'GET' do%>
+                      Edit
+                    <%end%>
+                    <!--- <span><a class="actions__item zmdi zmdi-eye text-gray" title="View license" href="license-inline.html" target="new"></a></span> --> 
                     <!--- Delete -->
                     <!---<a class="actions__item zmdi zmdi-delete text-danger" title="delete this record" >
                     </a> -->
