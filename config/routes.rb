@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root 'index#index'
   post 'index/upload_file'
   post 'index/upload_schedule'
-  get '/index/edit_permit/:id', to: 'index#edit_permit', as: :edit_permit
-  post 'index/update/:id', to: 'index#update', as: :update
+  get '/index/edit/:id', to: 'index#edit', as: :edit
+  post '/index/edit/:id', to: 'index#update'
   get '/print_permit/:id', to: 'index#print_permit', as: :print_permit
   get '/print_permit_new/:id', to: 'index#print_permit_new', as: :print_permit_new
  

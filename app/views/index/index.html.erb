@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>LID Licenses</title>
 <!-- Vendor styles -->
-	<link rel="stylesheet" href="css/dropify2.css">
+<link rel="stylesheet" href="css/dropify2.css">
 <link rel="stylesheet" href="vendors/dropzone/dropzone.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
@@ -104,7 +104,6 @@
              <div class="container-contact100-form-btn w-100 ">
              <%= submit_tag 'Save', class:"contact100-form-btn w-100" %>
         <% end %>
-
       </div>
     </div>
     <a href="messages.html" class="btn btn--action btn-danger d-none"><i class="zmdi zmdi-plus"></i></a> </aside>
@@ -139,11 +138,10 @@
             <%= text_field_tag :physical_address, nil, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
             <span class="focus-input100"></span> </div>
 
-            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name"><aside class="chat" id="new-application">
-   
+            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
             <%= text_field_tag :plot_number, nil, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
             <span class="focus-input100"></span> </div>
-            <!--				physical address-->
+          <!--				physical address-->
             <hr class="w-100 +">
 
              <!--- Type-->
@@ -177,75 +175,7 @@
     </div>
     <a href="messages.html" class="btn btn--action btn-danger d-none"><i class="zmdi zmdi-plus"></i></a> </aside>
 
-    <!---Edit License-->
-    <aside class="update" id="update-application">
-    <div class="chat__header px-4">
-      <h2 class="chat__title mb-3">Update License <small>Edit all the field to update application</small></h2>
-    </div>
-    <div class="scrollbar-inner">
-      <div class="px-4 pt-1 height-100150">
-        <%= form_tag create_permit_path , class: "contact100-form validate-form p-0 border-top", multipart: true do %>
-            <!---Enter Business name-->
-            <label class="label-input100 mb-2" for="business_name">Business Name *</label>
-            <div class="wrap-input100 validate-input" data-validate="Type Business Name">
-             <%= text_field_tag :business_name, nil, :required => true, placeholder: "Enter name of the business", class: "input100" %>
-
-             <span class="focus-input100"></span> </div>
-
-             <!-- Enter Business Number-->
-             <label class="label-input100 mb-2" for="bid_number">Business Number *</label>
-             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
-             <%= text_field_tag :bid_number, nil, :required =>true, placeholder: "Business number", class:"input100" %>
-
-             <span class="focus-input100"></span> </div>
-
-            <!---Physical Address-->
-            <label class="label-input100 mb-2" for="physical_address">Business Location Details *</label>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-            
-            <%= text_field_tag :physical_address, nil, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
-            <span class="focus-input100"></span> </div>
-
-            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
-            <%= text_field_tag :plot_number, nil, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
-            <span class="focus-input100"></span> </div>
-          <!--				physical address-->
-          <hr class="w-100 +">
-
-             <!--- Type-->
-             <label class="label-input100 mb-2" for="schedule_id">License type *</label>
-             <div class="wrap-input100  validate-input" data-validate="Type Business Name">
-             <%= select_tag :schedule_id, options_from_collection_for_select(@schedule, "id", "name"), class:"input100", placeholder:"Select license type" %>
-             <span class="focus-input100"></span> </div>
-             
-             <!--- Date Paid-->
-             <label class="label-input100 mb-2" for="date_paid">Date paid *</label>
-             <div class="wrap-input100  validate-input" data-validate="Select a date">
-             <%= text_field_tag :date_paid, nil, :required => true,placeholder:"select date", class: "input100 date-picker" %>
-             <span class="focus-input100"></span> </div>
-             <!---Date From-->
-             <label class="label-input100 mb-2" for="valid_from">Valid from *</label>
-             <div class="wrap-input100  validate-input" data-validate="Select a date">
-             <%= text_field_tag :valid_from, nil, :required => true, placeholder:"select date", class:"input100 date-picker" %>
-             <span class="focus-input100"></span> </div>
-             <hr class="w-100 +">
-
-             <!--- Date From-->
-             <label class="label-input100 mb-2" for="amount">amount</label>
-             <div class="wrap-input100  validate-input" data-validate="Select a date">
-             <%= text_field_tag :amount, nil, :required => true,  class:"input100 text-right", type:"number", placeholder:"Enter amount paid" %>
-             <span class="focus-input100"></span> </div>
-             <div class="container-contact100-form-btn w-100 ">
-             <%= submit_tag 'Save', class:"contact100-form-btn w-100" %>
-        <% end %>
-
-      </div>
-    </div>
-    <a href="messages.html" class="btn btn--action btn-danger d-none"><i class="zmdi zmdi-plus"></i></a> </aside>
-	
-	
-<!--	license renewals-->
-  <!--		form container--> 
+   <!--		form container--> 
   
   <!--	datatable-->
   <section class="content p-4">
@@ -457,5 +387,6 @@ footer
 	</script>
     <%= content_tag :div, class: "permit_information", data: {permit: @permits} do %>
         <% end %>
+    <div id="updateDiv"></div>
 </body>
 </html>
