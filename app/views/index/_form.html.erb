@@ -13,18 +13,18 @@
      <!---Business number field-->
      <label class="label-input100 mb-2" for="bid_number">Business Number *</label>
      <div class="wrap-input100  validate-input" data-validate="Type Business Name">
-     <%= f.text_field :bid_number, :required =>true, placeholder: "Business number", class:"input100", name: "bid_number" %>
+     <%= f.text_field :bid_number, :required =>true, placeholder: "Business number", class:"input100" %>
      <span class="focus-input100"></span> </div>
 
      <!---Physical address field-->
      <label class="label-input100 mb-2" for="physical_address">Business Location Details *</label>
      <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-     <%= f.text_field :physical_address, class:"input100", name:"physical_address", placeholder:"Physical address", type:"text" %>
+     <%= f.text_field :physical_address, class:"input100", placeholder:"Physical address", type:"text" %>
      <span class="focus-input100"></span> </div>
 
      <!---Plot number field-->
      <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
-     <%= f.text_field :plot_number, class:"input100", type:"text", name:"plot_number", plot_number:"Plot Number", placeholder:"Plot Number" %>
+     <%= f.text_field :plot_number, class:"input100", type:"text", plot_number:"Plot Number", placeholder:"Plot Number" %>
      <span class="focus-input100"></span> </div>
      <hr class="w-100 +">
 

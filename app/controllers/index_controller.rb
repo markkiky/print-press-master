@@ -1,6 +1,7 @@
 class IndexController < ApplicationController
   before_action :authenticate_user!
-  before_action :permit_params, only: [:create_permit]
+  before_action :permit_params, only: [:create_permit, :update]
+  ActionController::Parameters.permit_all_parameters = true
   require 'rqrcode'
 
   @@start_lid = 13339
@@ -27,7 +28,7 @@ class IndexController < ApplicationController
     if Liqour.where(is_renewal: false).any? == false
       @permit = Liqour.new(permit_params)
       @permit.lid = @@start_lid
-      @schedule = 
+      @schedule = Schedule.all
       logger.debug { "The First If" }
     else
       @permit = Liqour.new(permit_params)
@@ -66,7 +67,7 @@ class IndexController < ApplicationController
     redirect_to root_url
   end
 
-  def update
+  def update 
     @permit = Liqour.find(params[:id])
     @permit.update(permit_params)
     redirect_to root_url
@@ -91,6 +92,6 @@ class IndexController < ApplicationController
   private
 
   def permit_params
-    params.permit(:business_name, :bid_number, :physical_address, :plot_number, :licence_type, :date_paid, :valid_from, :amount, :schedule_id, :lid)
+    params.require(:permit)
   end
 end
