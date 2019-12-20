@@ -92,6 +92,6 @@ class IndexController < ApplicationController
   private
 
   def permit_params
-    params.require(:permit)
+    params.permit(:business_name, :bid_number, :licence_type, :amount, :date_paid, :licence_type, :exceptions, :physical_address, :plot_number, :schedule_id, :lid, :valid_from)
   end
 end
