@@ -34,7 +34,9 @@
                     <!--- Delete -->
                     <!---<a class="actions__item zmdi zmdi-delete text-danger" title="delete this record" >
                     </a> -->
-                    <span class="delete-record"><i  class= "actions__item zmdi zmdi-delete text-danger" title="delete this record"></i></span>                    
+                    <%=link_to delete_permit_path(permit.id), class: "actions__item zmdi zmdi-delete text-danger", title: "delete this record", method: "DELETE",:data => {:confirm => "Are you sure?"}  do %>
+                        <span><i></i></span>
+                    <%end%>                    
                 </div>
                 </div>
              </td>
